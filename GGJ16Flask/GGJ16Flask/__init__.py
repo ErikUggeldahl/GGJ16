@@ -2,11 +2,12 @@
 The flask application package.
 """
 
+from os import getcwd
 import sqlite3
 from flask import Flask, session, g, abort, render_template
 from contextlib import closing
 
-DATABASE = 'ritual.db'
+DATABASE = '../ritual.db'
 DEBUG = True
 SECRET_KEY = 'dev key'
 USERNAME = 'admin'
@@ -18,6 +19,8 @@ def connect_db():
     conn = sqlite3.connect(app.config['DATABASE'])
 
     print "Connection: " + str(conn)
+
+    print "Current directory:" + os.getcwd()
 
     return conn
 
