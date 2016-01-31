@@ -49,6 +49,7 @@
     <Content Include="GGJ16Flask\schema.sql">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="GGJ16Flask\templates\spectate.html" />
     <Content Include="GGJ16Flask\templates\join_ritual.html" />
     <Content Include="GGJ16Flask\templates\ritual.html" />
     <Content Include="requirements.txt" />

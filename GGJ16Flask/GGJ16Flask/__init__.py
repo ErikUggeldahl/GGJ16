@@ -14,11 +14,7 @@ USERNAME = 'admin'
 PASSWORD = 'admin'
 
 def connect_db():
-    print "DATABASE: " + app.config['DATABASE']
-
     conn = sqlite3.connect(app.config['DATABASE'])
-
-    print "Connection: " + str(conn)
 
     print "Current directory:" + os.getcwd()
 

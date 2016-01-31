@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h2>{{ title }}</h2>
+
+{% for ritual in rituals %}
+<h4>{{ ritual.name }}</h4>
+<div class="progress">
+    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ ritual.progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ ritual.progress }}%">
+        <span class="sr-only">{{ ritual.progress }} Complete (success)</span>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    $(document).ready(function () {
+        window.setTimeout(function () { location.reload(); }, 2000);
+    });
+</script>
+
+{% endblock %}
