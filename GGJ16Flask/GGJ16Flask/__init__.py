@@ -2,12 +2,12 @@
 The flask application package.
 """
 
-from os import getcwd
+import os
 import sqlite3
 from flask import Flask, session, g, abort, render_template
 from contextlib import closing
 
-DATABASE = '../ritual.db'
+DATABASE = 'ritual.db'
 DEBUG = True
 SECRET_KEY = 'dev key'
 USERNAME = 'admin'
