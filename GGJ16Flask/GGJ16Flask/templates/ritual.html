@@ -1,12 +1,9 @@
-﻿<!DOCTYPE html>
+﻿{% extends "layout.html" %}
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <title>New Ritual</title>
-</head>
-<body>
-    <p>Created new ritual with count: {{ count }}</p>
+{% block content %}
 
-</body>
-</html>
+<h2>{{ title }}</h2>
+
+<p>{{ game_id }} : {{ ritual_id }}</p>
+
+{% endblock %}

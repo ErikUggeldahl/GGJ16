@@ -3,7 +3,7 @@ The flask application package.
 """
 
 import sqlite3
-from flask import Flask, request, session, g, abort, render_template
+from flask import Flask, session, g, abort, render_template
 from contextlib import closing
 
 DATABASE = 'ritual.db'
