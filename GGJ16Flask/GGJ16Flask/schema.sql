@@ -18,6 +18,8 @@ create table rituals (
   game_id integer not null,
   leader_id integer not null,
   name text not null unique,
+  sequence text not null,
+  points integer not null default 0,
   foreign key(game_id) references games(id),
   foreign key(leader_id) references players(id),
   unique (game_id, leader_id)
@@ -43,10 +45,10 @@ insert into players values (null, 'Test Player!');
 insert into players values (null, 'Test Player 2');
 insert into players values (null, 'Test Player 3');
 
-insert into rituals values (null, 1, 1, 'My Ritual');
-insert into rituals values (null, 1, 2, 'My Other Ritual');
-insert into rituals values (null, 1, 3, 'My Empty Ritual');
-insert into rituals values (null, 2, 1, 'My Other Game Ritual');
+insert into rituals values (null, 1, 1, 'My Ritual', "", 0);
+insert into rituals values (null, 1, 2, 'My Other Ritual', "", 0);
+insert into rituals values (null, 1, 3, 'My Empty Ritual', "", 0);
+insert into rituals values (null, 2, 1, 'My Other Game Ritual', "", 0);
 
 insert into ritual_players values (null, 1, 1, 3);
 insert into ritual_players values (null, 1, 1, 4);
