@@ -75,6 +75,8 @@
                 data: "game_id=" + game_id + "&player_id=" + player_id +"&ritual_name=" + ritual_name,
                 datatype: "HTML",
                 success: function (id) {
+                    $('#ritual-name').val("");
+
                     location.reload();
                 },
                 error: function (xhr, ajaxOptions, thrownError) {

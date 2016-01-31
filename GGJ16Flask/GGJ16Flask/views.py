@@ -48,17 +48,19 @@ def create_ritual():
     player_id = request.form['player_id']
     ritual_name = request.form['ritual_name']
 
-    #try:
-    cur = g.db.execute('insert into rituals values (null, ?, ?, ?)', (game_id, player_id, ritual_name))
-    g.db.commit()
+    try:
+        cur = g.db.execute('insert into rituals values (null, ?, ?, ?)', (game_id, player_id, ritual_name))
 
-    id = cur.lastrowid;
+        ritual_id = cur.lastrowid;
 
-    return make_response(str(id), 200)
+        cur = g.db.execute('insert into ritual_players values (null, ?, ?, ?)', (game_id, ritual_id, player_id))
+        g.db.commit();
 
-    #except sqlite3.Error as er:
-    #    response = create400('Looks like someone already took that name!')
-    #    return response
+        return make_response(str(ritual_id), 200)
+
+    except sqlite3.Error as er:
+        response = create400('Looks like someone already took that name!')
+        return response
 
 @app.route('/play/<url_game_id>')
 def join_ritual(url_game_id):
