@@ -91,11 +91,16 @@ def join_ritual(url_game_id):
 
 @app.route('/play/<url_game_id>/<url_ritual_id>')
 def ritual(url_game_id, url_ritual_id):
-	"""Renders the ritual page."""
+    """Renders the ritual page."""
 
-	return render_template(
-		'ritual.html',
-		title='Play!',
+    player_id = request.cookies.get('id')
+
+    cur = g.db.execute('insert into ritual_players values (null, ?, ?, ?)', (url_game_id, url_ritual_id, player_id))
+    g.db.commit()
+
+    return render_template(
+	    'ritual.html',
+	    title='Play!',
         game_id=url_game_id,
         ritual_id=url_ritual_id
 	)

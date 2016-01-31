@@ -30,7 +30,8 @@ create table ritual_players (
   player_id integer not null,
   foreign key(game_id) references games(id),
   foreign key(ritual_id) references rituals(id),
-  foreign key(player_id) references players(id)
+  foreign key(player_id) references players(id),
+  unique (game_id, ritual_id, player_id) on conflict ignore
 );
 
 insert into games values (null, 'Test Game');
