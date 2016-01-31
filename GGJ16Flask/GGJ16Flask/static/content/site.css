@@ -40,3 +40,10 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+.btn-xl {
+    padding: 20px 32px;
+    font-size: 30px;
+    line-height: 1.33;
+    border-radius: 6px;
+}

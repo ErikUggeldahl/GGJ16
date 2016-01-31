@@ -4,6 +4,71 @@
 
 <h2>{{ title }}</h2>
 
-<p>{{ game_id }} : {{ ritual_id }}</p>
+<h3>Press whichever one you're told to press</h3>
+<div class="btn-group" role="group" aria-label="Choices">
+    {% for index in icon_indices %}
+    <button type="button" class="btn btn-success btn-xl btn-choice">
+        <span class="glyphicon btn-glyph" aria-hidden="true"></span>
+    </button>
+    {% endfor %}
+</div>
+
+<h3>The player after you is: {{ next_player }}</h3>
+<h3>They need to press <span class="glyphicon" id="next-glyph" aria-hidden="true"></span></h3>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    $(document).ready(function () {
+
+        var indices = [
+            {% for index in icon_indices %}
+            {{ index }},
+            {% endfor %}
+            ];
+
+        var icons = [
+            {% for index in icon_indices %}
+                glyphicon_by_id({{ index }}),
+            {% endfor %}
+            ];
+
+        $('.btn-glyph').each(function (index) {
+            $(this).addClass(icons[index]);
+            var boundCallback = add1.bind(this, 1);
+            $(this).click(function () { console.log("Clicked"); });
+        });
+
+        $('.btn-choice').each(function (index) {
+            var boundCallback = buttonAjax.bind(this, indices[index]);
+            $(this).click(boundCallback);
+        });
+
+        $('#next-glyph').addClass(glyphicon_by_id({{ next_icon_id }}));
+    });
+
+    function add1 (x) { console.log(x + 1); }
+
+    function buttonAjax(index) {
+
+        var player_id = getIDCookie();
+
+        $.ajax(
+            {
+                method: "POST",
+                url: "/play/{{ game_id }}/{{ ritual_id }}",
+                data: "player_id=" + player_id + "&choice=" + index,
+                datatype: "HTML",
+                success: function (id) {
+                    
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log("Nope!");
+                }
+            });
+    }
+</script>
 
 {% endblock %}

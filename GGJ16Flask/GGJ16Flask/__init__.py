@@ -13,8 +13,11 @@ USERNAME = 'admin'
 PASSWORD = 'admin'
 
 def connect_db():
-	print app.config['DATABASE']
-	return sqlite3.connect(app.config['DATABASE'])
+    print "DATABASE: " + app.config['DATABASE']
+
+    conn = sqlite3.connect(app.config['DATABASE'])
+
+    return conn
 
 def init_db():
 	with closing(connect_db()) as db:

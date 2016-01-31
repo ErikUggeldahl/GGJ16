@@ -5,6 +5,7 @@ Routes and views for the flask application.
 import urllib2
 import sqlite3
 from datetime import datetime
+from random import shuffle, randrange
 from flask import render_template, g, flash, redirect, url_for, request, make_response, jsonify
 from GGJ16Flask import app
 
@@ -98,12 +99,28 @@ def ritual(url_game_id, url_ritual_id):
     cur = g.db.execute('insert into ritual_players values (null, ?, ?, ?)', (url_game_id, url_ritual_id, player_id))
     g.db.commit()
 
+    icon_indices = [randrange(262) for i in range(10)]
+    next_icon = randrange(262)
+
     return render_template(
 	    'ritual.html',
 	    title='Play!',
         game_id=url_game_id,
-        ritual_id=url_ritual_id
+        ritual_id=url_ritual_id,
+        icon_indices=icon_indices,
+        next_icon_id=next_icon
 	)
+
+@app.route('/play/<url_game_id>/<url_ritual_id>', methods=['POST'])
+def ritual_post(url_game_id, url_ritual_id):
+    """Handles ritual inputs."""
+
+    player_id = request.form['player_id']
+    choice = request.form['choice']
+
+    a = str(1 + 1)
+
+    return make_response("" + str(1+1), 201) #continue here, there's something fishy with not sending a body
 
 @app.route('/contact')
 def contact():
@@ -124,18 +141,6 @@ def about():
         year=datetime.now().year,
         message='Your application description page.'
     )
-
-@app.route('/ritual/add', methods=['POST'])
-def ritual_add():
-
-    cur = g.db.execute('select count from rituals')
-    count = cur.fetchone()[0]
-
-    g.db.execute('update rituals set count = ? where id = 0', [count + 1])
-    g.db.commit()
-
-    flash('Success!')
-    return redirect(url_for('ritual'))
 
 def create400(reason):
     response_dict = {'reason': reason}
