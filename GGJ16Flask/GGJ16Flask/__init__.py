@@ -17,7 +17,7 @@ def connect_db():
 
     conn = sqlite3.connect(app.config['DATABASE'])
 
-    print "Connection: " + conn
+    print "Connection: " + str(conn)
 
     return conn
 
