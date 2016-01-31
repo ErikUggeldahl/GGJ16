@@ -17,6 +17,8 @@ def connect_db():
 
     conn = sqlite3.connect(app.config['DATABASE'])
 
+    print "Connection: " + conn
+
     return conn
 
 def init_db():
